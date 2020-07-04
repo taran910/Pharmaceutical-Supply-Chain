@@ -2,6 +2,8 @@
 <html lang="en">
 
 <head>
+    <script src="../node_modules/web3/dist/web3.min.js"></script>
+    <script src="smartcontract.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -107,37 +109,35 @@
                 <form>
                     <div class="form-group">
                         <label for="exampleInputID1">Enter your ID</label>
-                        <input type="text" class="form-control" id="exampleInputID1"
+                        <input type="text" class="form-control" id="id"
                             aria-describedby="IDHelp" placeholder="Enter your ID">
                     </div>
 
                     <div class="container mb-3">
                         <label for="exampleInput1">Please Select Your Position</label>
                         <select name="select" id="select">
-                            <option value="Manufacturer">Manufacturer</option>
-                            <option value="Retailer">Retailer</option>
-                            <option value="Dealer">Dealer</option>
+                            <option id="man" value="Manufacturer">Manufacturer</option>
+                            <option id="ret" value="Retailer">Retailer</option>
+                            <option id="dis"value="Distributor">Distributor</option>
                         </select>
                     </div>
                    
 
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1"
+                        <input id="pass" type="password" class="form-control" id="exampleInputPassword1"
                             placeholder="Password">
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Show Password</label>
-                    </div>
+                
                 </form>
             </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-danger" href="../index.html">Back</a>
-                <a type="button" class="btn btn-primary">Login</a>
+                <a type="button" class="btn btn-primary" onclick="Login()">Login</a>
             </div>
         </div>
     </div>
+    
 
 
 
@@ -165,4 +165,48 @@
             crossorigin="anonymous"></script>
 </body>
 
+<script>
+    function Login(){
+        if(typeof web3!='undefined'){
+            web3=new Web3(web3.currentProvider);
+        }else{
+            web3=new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+        web3.eth.defaultAccount=web3.eth.accounts[0];
+        var bc=web3.eth.contract(ABI);
+        var c=bc.at(address);
+
+        var id=document.getElementById("id").value;
+        var password=document.getElementById("pass").value;
+        if(document.getElementById("man").selected==true){
+            var u=c.validateManufacturer(id,password,{from:web3.eth.accounts[0],gas:1000000});
+            console.log(u);
+            if(u[0]==true){
+                sessionStorage.setItem("u",u);
+                window.location="manufacturer.html";
+            }
+            else{
+                alert("Wrong credentials");
+            }
+        }
+            
+        if(document.getElementById("ret").selected==true)
+        {
+            var u=c.validateRetailer(id,password,{from:web3.eth.accounts[0],gas:1000000});
+            console.log(u);
+            if(u[0]==true){
+                sessionStorage.setItem("u",u);
+                window.location="retailer.html";
+            }
+        }
+        if(document.getElementById("dis").selected==true){
+            var u=c.validateDistributor(id,password,{from:web3.eth.accounts[0],gas:1000000});
+            console.log(u);
+            if(u[0]==true){
+                sessionStorage.setItem("u",u);
+                window.location="distributor.html";
+            }
+        }
+    }
+</script>
 </html>

@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="smartcontract.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -55,7 +56,7 @@
             margin-bottom: 100px;
         }
     </style>
-
+<script src="../node_modules/web3/dist/web3.min.js"></script>
 </head>
 
 <body>
@@ -104,8 +105,11 @@
             <div class="card-body">
                 <form>
                     <div class="form-group">
+                        <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Enter Name*" id="name" />
+                    </div>
 
-                        <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                        <input type="name" class="form-control" id="email" aria-describedby="emailHelp"
                             placeholder="Enter email">
 
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
@@ -114,36 +118,29 @@
 
                     </div>
 
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Enter Name*" value="" />
-                    </div>
 
+                    <div class="form-group">
+                    <input type="name" class="form-control" id="phone" aria-describedby="Help"
+                            placeholder="Enter Phone Number">
+                        </div>
                     <div class="container mb-3">
+
                         <label for="exampleInputEmail1">Please Select Your Position</label>
                         <select name="select" id="select">
-                            <option value="Manufacturer">Manufacturer</option>
-                            <option value="Retailer">Retailer</option>
-                            <option value="Dealer">Dealer</option>
+                            <option id="man" value="Manufacturer">Manufacturer</option>
+                            <option id="ret" value="Retailer">Retailer</option>
+                            <option id="dis"value="Distributor">Distributor</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Confirm Password *" value="" />
-                    </div>
-
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Show Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <a href="../index.html" type="button" class="btn btn-danger" data-dismiss="modal">cancel</a>
-                <a type="button" class="btn btn-primary">signUp</a>
+                <a href="login.html" type="button" class="btn btn-primary" onclick="signUp()">signUp</a>
             </div>
         </div>
     </div>
@@ -172,5 +169,31 @@
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 </body>
+<script>
+    if(typeof web3!='undefined'){
+web3=new Web3(web3.currentProvider);
+}else{
+web3=new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+}
+web3.eth.defaultAccount=web3.eth.accounts[0];
+var bc=web3.eth.contract(ABI);
+var c=bc.at(address);
+function signUp(){
+    var name=document.getElementById("name").value;
+    var email=document.getElementById("email").value;
+    var phone=document.getElementById("phone").value;
+    var password=document.getElementById("password").value;
+    if(document.getElementById("man").selected==true){
+        c.registerManufacturer(name,email,phone,password,{from:web3.eth.accounts[0],gas:1000000});
+    }
+    if(document.getElementById("ret").selected==true)
+    {
+        c.registerRetailer(name,email,phone,password,{from:web3.eth.accounts[0],gas:1000000});
 
+    }
+    if(document.getElementById("dis").selected==true){
+        c.registerDistributor(name,email,phone,password,{from:web3.eth.accounts[0],gas:1000000});
+    }
+    }
+</script>
 </html>
