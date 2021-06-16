@@ -42,4 +42,13 @@ On clicking sign-up user id will be created in the particular designation the us
 
 ●	Pharmacy Screen:- For a particular product pharmacy will add its information along with id , date of sale  etc, which will help to keep a good track of pharmaceutical products.
 
-●	Customer Screen:- On customer screen user/consumer can view the complete product information including its date of manufacture, manufacturer details, distributor details, etc using the product id 
+●	Customer Screen:- On customer screen user/cons
+umer can view the complete product information including its date of manufacture, manufacturer details, distributor details, etc using the product id 
+![signup html page](https://user-images.githubusercontent.com/55267028/122246337-15e31100-cee4-11eb-8dae-ac4525250118.PNG)
+![login html page](https://user-images.githubusercontent.com/55267028/122246273-09f74f00-cee4-11eb-8d1c-41f171a0ac7e.PNG)
+![manufacturer html page](https://user-images.githubusercontent.com/55267028/122246307-1085c680-cee4-11eb-9395-5e5f58156608.PNG)
+![Distributor html page](https://user-images.githubusercontent.com/55267028/122246109-e9c79000-cee3-11eb-8032-a67698ee11c4.PNG)
+![Retailer html page](https://user-images.githubusercontent.com/55267028/122246325-1380b700-cee4-11eb-9edf-4b72bddfa522.PNG)
+![ADD customer html page](https://user-images.githubusercontent.com/55267028/122245974-cef51b80-cee3-11eb-97b3-4ee0d2af8c1e.PNG)
+![get Product details page](https://user-images.githubusercontent.com/55267028/122246205-fba93300-cee3-11eb-8c2e-de9426a57645.PNG)
+![index html page](https://user-images.githubusercontent.com/55267028/122246250-049a0480-cee4-11eb-9281-a242916c52f6.PNG)
