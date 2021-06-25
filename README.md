@@ -1,4 +1,4 @@
-# Pharmaceutical-Supply-Chain
+# Pharmaceutical-Supply-Chain (BlockChain)
 
 Blockchain technology provides the pharmaceutical supply chain a better way to add compliance and governance within the supply chain. Due to its inherent transparency, immutability and distributed nature, Blockchain technology provides a mechanism that allows any participant in the supply chain to ensure that the supply chain logistics and transportation guidelines (including handling and storage conditions of the drugs), were adhered to.
 Additionally smart contracts can be programmed that automatically execute when compliance conditions are not met, thereby alerting the relevant parties in the supply chain.
